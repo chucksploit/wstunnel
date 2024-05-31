@@ -2,7 +2,7 @@
 name = "wstunnel"
 version = "9.6.1"
 edition = "2021"
-repository = "https://github.com/erebe/wstunnel.git"
+repository = "https://github.com/chucksploit/wstunnel.git"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
