@@ -57,7 +57,7 @@ const DEFAULT_CLIENT_UPGRADE_PATH_PREFIX: &str = "v1";
 /// wsTunnelClient <---> wsTunnelServer <---> RemoteHost
 #[derive(clap::Parser, Debug)]
 #[command(author, version, about, verbatim_doc_comment, long_about = None)]
-struct Wstunnel {
+pub struct Wstunnel {
     #[command(subcommand)]
     commands: Commands,
 
@@ -96,7 +96,7 @@ enum Commands {
     Server(Box<Server>),
 }
 #[derive(clap::Args, Debug)]
-struct Client {
+pub struct Client {
     /// Listen on local and forwards traffic from remote. Can be specified multiple times
     /// examples:
     /// 'tcp://1212:google.com:443'      =>       listen locally on tcp on port 1212 and forward to google.com on port 443
@@ -248,7 +248,7 @@ struct Client {
 }
 
 #[derive(clap::Args, Debug)]
-struct Server {
+pub struct Server {
     /// Address of the wstunnel server to bind to
     /// Example: With TLS wss://0.0.0.0:8080 or without ws://[::]:8080
     ///
@@ -719,7 +719,7 @@ impl WsClientConfig {
 }
 
 #[tokio::main]
-async fn main() {
+pub async fn run() {
     let args = Wstunnel::parse();
 
     // Setup logging
