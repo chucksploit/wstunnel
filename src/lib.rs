@@ -1,16 +1,16 @@
-mod dns;
-mod embedded_certificate;
-mod restrictions;
-mod socks5;
-mod socks5_udp;
-mod stdio;
-mod tcp;
-mod tls;
-mod tls_utils;
-mod tunnel;
-mod udp;
+pub mod dns;
+pub mod embedded_certificate;
+pub mod restrictions;
+pub mod socks5;
+pub mod socks5_udp;
+pub mod stdio;
+pub mod tcp;
+pub mod tls;
+pub mod tls_utils;
+pub mod tunnel;
+pub mod udp;
 #[cfg(unix)]
-mod unix_socket;
+pub mod unix_socket;
 
 use anyhow::anyhow;
 use base64::Engine;
@@ -1068,7 +1068,7 @@ pub async fn run() {
                             .unwrap_or_else(|err| panic!("Cannot start TProxy TCP server on {}: {}", tunnel.local, err))
                             .map_err(anyhow::Error::new)
                             .map_ok(move |stream| {
-                                // In TProxy mode local destination is the final ip:port destination
+                                // In TProxy pub mode local destination is the final ip:port destination
                                 let (host, port) = to_host_port(stream.local_addr().unwrap());
                                 let remote = RemoteAddr {
                                     protocol: LocalProtocol::Tcp { proxy_protocol: false },
@@ -1124,7 +1124,7 @@ pub async fn run() {
                                 })
                                 .map_err(anyhow::Error::new)
                                 .map_ok(move |stream| {
-                                    // In TProxy mode local destination is the final ip:port destination
+                                    // In TProxy pub mode local destination is the final ip:port destination
                                     let (host, port) = to_host_port(stream.local_addr().unwrap());
                                     let remote = RemoteAddr {
                                         protocol: LocalProtocol::Udp { timeout },
